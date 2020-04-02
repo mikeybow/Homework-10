@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Notepad</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.3/flatly/bootstrap.min.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Home
+    </a>
+  </nav>
+  <div class="container">
+    <div style="margin-top: 80px;" class="jumbotron text-center">
+      <h1 class="display-4">Notepad</h1>
+      <h4 class="mt-4">Make Your Notes</h4>
+      <a class="btn btn-primary btn-lg mt-4" href="notes.html" role="button">View Saved Notes</a>
+      <a class="btn btn-danger btn-lg mt-4" href="index.html" role="button">Home</a>
+    </div>
+
+    <form>
+        <div class="form-group">
+          <label for="noteInput">New Notes</label>
+          <input type="input" class="form-control" id='notes_here'>
+        </div>
+
+       
+        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+      </form>
+      
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+
+<script type="text/javascript">
+
+
+	$("#submit").on("click", function(){
+
+		
+		var newNote = {
+			Notes: $('#notes_here').val().trim(),
+			};
+
+		console.log(newNote);
+
+		var currentURL = window.location.origin;
+
+	    $.post(currentURL + "/api/notes", newNote,
+	    function(data){
+
+	    	if(data == true){
+	    		alert("Yay! You are officially saved your note!")
+	    	}
+
+    		$('#notes_here').val("");
+            
+        });
+
+return false;
+
+});
+
+</script>
+
+</html>
